@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useWorkoutsContext } from '../hooks/useWorkoutsContext';
 
 const WorkoutForm = () => {
 	const [workout, setWorkout] = useState({
@@ -7,8 +8,8 @@ const WorkoutForm = () => {
 		load: '',
 	});
 	const [error, setError] = useState(null);
-
-	console.log(workout);
+	const [emptyFields, setEmptyFields] = useState([]);
+	const { dispatch } = useWorkoutsContext();
 
 	const addData = (e) => {
 		e.preventDefault();
@@ -20,7 +21,6 @@ const WorkoutForm = () => {
 
 	const submitData = async (e) => {
 		e.preventDefault();
-		console.log(workout);
 		const response = await fetch('/api/workouts', {
 			method: 'POST',
 			headers: {
@@ -31,11 +31,13 @@ const WorkoutForm = () => {
 		const newWorkout = await response.json();
 		if (newWorkout.message) {
 			setError(newWorkout.message);
+			setEmptyFields([...newWorkout.emptyFields]);
 		}
 		if (!newWorkout.message) {
-			console.log(newWorkout);
+			dispatch({ type: 'CREATE_WORKOUT', payload: newWorkout });
 			setWorkout({ title: '', reps: '', load: '' });
 			setError(null);
+			setEmptyFields([]);
 		}
 	};
 
@@ -50,6 +52,7 @@ const WorkoutForm = () => {
 					id="title"
 					value={workout.title}
 					onChange={addData}
+					className={emptyFields.includes('title') ? 'error' : ''}
 				/>
 				<label htmlFor="reps">Reps: </label>
 				<input
@@ -57,6 +60,7 @@ const WorkoutForm = () => {
 					name="reps"
 					value={workout.reps}
 					onChange={addData}
+					className={emptyFields.includes('reps') ? 'error' : ''}
 				/>
 				<label htmlFor="load">Load in kg: </label>
 				<input
@@ -64,6 +68,7 @@ const WorkoutForm = () => {
 					name="load"
 					value={workout.load}
 					onChange={addData}
+					className={emptyFields.includes('load') ? 'error' : ''}
 				/>
 				<button type="submit">Add Workout</button>
 				{error && <div className="error">{error}</div>}
