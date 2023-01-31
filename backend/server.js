@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 const express = require('express');
 const cors = require('cors');
 const routerWorkouts = require('./routes/workoutRoutes');
+const userRoutes = require('./routes/userRoutes');
 require('dotenv').config();
 
 // express app
@@ -22,6 +23,7 @@ const port = process.env.PORT || 4000;
 app.get('/', logRequest, (req, res) => {
 	res.json({ message: 'Welcome' });
 });
+app.use('/api/user', userRoutes);
 app.use('/api/workouts', routerWorkouts);
 
 // connect to the database
