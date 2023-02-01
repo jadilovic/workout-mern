@@ -3,6 +3,7 @@ const express = require('express');
 const cors = require('cors');
 const routerWorkouts = require('./routes/workoutRoutes');
 const userRoutes = require('./routes/userRoutes');
+const requireAuth = require('./middleware/requireAuth');
 require('dotenv').config();
 
 // express app
@@ -24,7 +25,7 @@ app.get('/', logRequest, (req, res) => {
 	res.json({ message: 'Welcome' });
 });
 app.use('/api/user', userRoutes);
-app.use('/api/workouts', routerWorkouts);
+app.use('/api/workouts', requireAuth, routerWorkouts);
 
 // connect to the database
 const start = async () => {
