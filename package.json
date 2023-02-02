@@ -1,0 +1,21 @@
+{
+	"name": "workout",
+	"version": "1.0.0",
+	"description": "",
+	"main": "./backend/server.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"start": "cd ./backend && node server.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/jadilovic/workout-mern.git"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/jadilovic/workout-mern/issues"
+	},
+	"homepage": "https://github.com/jadilovic/workout-mern#readme"
+}
