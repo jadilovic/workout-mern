@@ -6,6 +6,7 @@ const WorkoutDetails = ({ workout }) => {
 	const { _id, title, reps, load, createdAt } = workout;
 	const { dispatch } = useWorkoutsContext();
 	const { user } = useAuthContext();
+	console.log('SERVER DETAILS : ' + process.env.REACT_APP_SERVER_URL);
 
 	const handleClick = async () => {
 		if (!user) {

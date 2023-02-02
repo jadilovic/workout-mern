@@ -8,6 +8,7 @@ const Home = () => {
 	// const [workouts, setWorkouts] = useState(null);
 	const { workouts, dispatch } = useWorkoutsContext();
 	const { user } = useAuthContext();
+	console.log('SERVER : ' + process.env.REACT_APP_SERVER_URL);
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await fetch(

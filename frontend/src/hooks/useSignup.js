@@ -5,6 +5,7 @@ const useSignup = () => {
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(null);
 	const { dispatch } = useAuthContext();
+	console.log('SERVER USE SIGNUP: ' + process.env.REACT_APP_SERVER_URL);
 
 	const signup = async (email, password) => {
 		setError(null);

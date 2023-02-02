@@ -12,6 +12,7 @@ const WorkoutForm = () => {
 	const [emptyFields, setEmptyFields] = useState([]);
 	const { dispatch } = useWorkoutsContext();
 	const { user } = useAuthContext();
+	console.log('SERVER FORM: ' + process.env.REACT_APP_SERVER_URL);
 
 	const addData = (e) => {
 		e.preventDefault();

@@ -5,6 +5,7 @@ const useLogin = () => {
 	const [error, setError] = useState(null);
 	const [isLoading, setIsLoading] = useState(null);
 	const { dispatch } = useAuthContext();
+	console.log('SERVER USE LOGIN : ' + process.env.REACT_APP_SERVER_URL);
 
 	const login = async (email, password) => {
 		setError(null);
