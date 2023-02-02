@@ -9,11 +9,14 @@ const useLogin = () => {
 	const login = async (email, password) => {
 		setError(null);
 		setIsLoading(true);
-		const response = await fetch('/api/user/login', {
-			method: 'POST',
-			headers: { 'Content-Type': 'application/json' },
-			body: JSON.stringify({ email, password }),
-		});
+		const response = await fetch(
+			`${process.env.REACT_APP_SERVER_URL}/api/user/login`,
+			{
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ email, password }),
+			}
+		);
 		const user = await response.json();
 
 		if (!response.ok) {

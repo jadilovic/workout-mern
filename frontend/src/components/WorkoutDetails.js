@@ -12,12 +12,15 @@ const WorkoutDetails = ({ workout }) => {
 			return;
 		}
 		try {
-			const response = await fetch(`/api/workouts/${_id}`, {
-				method: 'DELETE',
-				headers: {
-					Authorization: `Bearer ${user.token}`,
-				},
-			});
+			const response = await fetch(
+				`${process.env.REACT_APP_SERVER_URL}/api/workouts/${_id}`,
+				{
+					method: 'DELETE',
+					headers: {
+						Authorization: `Bearer ${user.token}`,
+					},
+				}
+			);
 			const deletedWorkout = await response.json();
 			dispatch({ type: 'DELETE_WORKOUT', payload: deletedWorkout });
 		} catch (error) {

@@ -27,14 +27,17 @@ const WorkoutForm = () => {
 			setError('You must be logged in to add workout!');
 			return;
 		}
-		const response = await fetch('/api/workouts', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json',
-				Authorization: `Bearer ${user.token}`,
-			},
-			body: JSON.stringify(workout),
-		});
+		const response = await fetch(
+			`${process.env.REACT_APP_SERVER_URL}/api/workouts`,
+			{
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+					Authorization: `Bearer ${user.token}`,
+				},
+				body: JSON.stringify(workout),
+			}
+		);
 
 		const newWorkout = await response.json();
 		if (newWorkout.message) {
