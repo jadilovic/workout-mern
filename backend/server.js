@@ -13,19 +13,18 @@ const app = express();
 // middleware
 app.use(express.json());
 app.use(cors());
-app.use(express.static(path.join(__dirname, '../frontend/build')));
 
-const logRequest = (req, res, next) => {
-	console.log(req.path, req.method);
-	next();
-};
+// const logRequest = (req, res, next) => {
+// 	console.log(req.path, req.method);
+// 	next();
+// };
 
 // port
 const port = process.env.PORT || 4000;
 
 if (process.env.NODE_ENV === 'production') {
 	//*Set static folder up in production
-	//app.use(express.static('frontend/build'));
+	app.use(express.static(path.join(__dirname, '../frontend/build')));
 
 	app.get('/*', (req, res) =>
 		res.sendFile(path.resolve(__dirname, '../frontend/build/index.html'))
