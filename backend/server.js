@@ -33,9 +33,9 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // routes
-app.get('/', logRequest, (req, res) => {
-	res.json({ message: 'Welcome' });
-});
+// app.get('/', logRequest, (req, res) => {
+// 	res.json({ message: 'Welcome' });
+// });
 app.use('/api/user', userRoutes);
 app.use('/api/workouts', requireAuth, routerWorkouts);
 
